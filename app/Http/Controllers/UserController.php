@@ -83,4 +83,135 @@ class UserController extends Controller
             return ApiFormatter::createApi(200, "Success", $request->all());
         }
     }
+    public function getDetailUser(Request $request)
+    {
+        $detailUser = User::where('id', auth('api')->user()->id)->first();
+        if ($detailUser) {
+            return ApiFormatter::createApi(200, "Success", $detailUser);
+        } else {
+            return ApiFormatter::createApi(400, "Failed");
+        }
+    }
+
+    public function userVerification(Request $request)
+    {
+        $data = Varification::where('user_id', auth('api')->user()->id)->get()->count();
+        if ($data == 0) {
+            $insert = Varification::create([
+                'user_id' => auth('api')->user()->id,
+                'ktp' => $request->ktp,
+                'face_with_ktp' => $request->face_with_ktp,
+                'bornplace' => $request->bornplace,
+                'bornday' => $request->bornday,
+                'gender' => $request->gender,
+                'marital_status' => $request->marital_status,
+                'address' => $request->address,
+                'rt' => $request->rt,
+                'rw' => $request->rw,
+                'province' => $request->province,
+                'city' => $request->city,
+                'subdistrict' => $request->subdistrict,
+                'urban_village' => $request->urban_village,
+                'postal_code' => $request->postal_code,
+            ]);
+            return ApiFormatter::createApi(200, "Success", $insert);
+        } else {
+            $update = Varification::where('user_id', auth('api')->user()->id)->update($request->all());
+            return ApiFormatter::createApi(200, "Success", $request->all());
+        }
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $dataProfileUser = User::where('id', auth('api')->user()->id)->first();
+        $dataProfileCV = CurriculumVitae::where('user_id', auth('api')->user()->id)->get()->count();
+        $dataProfilePhoto = Photo::where('user_id', auth('api')->user()->id)->get()->count();
+
+        if ($dataProfileUser == 0 && $dataProfileCV == 0 && $dataProfilePhoto == 0) {
+            User::create([
+                'name' => $request->name,
+                'bornday' => $request->bornday,
+                'gender' => $request->gender
+            ]);
+            CurriculumVitae::create([
+                'marital_status' => $request->marital_status,
+            ]);
+            if ($files = $request->file('image')) {
+                foreach ($files as $file) {
+                    $name = $file->getClientOriginalName();
+                    $file->move(public_path('image'), $name);
+                    $photo = Photo::insert([
+                        'user_id' => $user,
+                        'image' =>  $name,
+                    ]);
+                }
+            }
+        } else {
+            $updateUser = CurriculumVitae::where('id', auth('api')->user()->id)->update($request->all());
+            $updateCV = CurriculumVitae::where('id', auth('api')->user()->id)->update($request->all());
+            $updatePhoto = CurriculumVitae::where('id', auth('api')->user()->id)->update($request->all());
+            return ApiFormatter::createApi(200, "Success", $request->all());
+        }
+    }
+
+    public function khitbahSubmission(Request $request, User $user, Khitbah $pendamping)
+    {
+        $dataFromSubmission = Khitbah::where('from', auth('api')->user()->id)->first();
+        $dataKhitbahSchedules = KhitbahSchedule::where('khitbah_id', auth('api')->khitbahSubmission()->id)->get()->count();
+        // $dataKhitbahSchedules = KhitbahSchedule::where('khitbah_id', auth('api')->user()->id)->get()->count();
+
+        if ($dataFromSubmission == 0 && $dataKhitbahSchedules == 0) {
+            $insertKhitbah = Khitbah::create([
+                'from' => auth('api')->user()->id,
+                'to' => $user,
+            ]);
+            return ApiFormatter::createApi(200, "Success", $insertKhitbah);
+            if ($pendamping == 0) { //mandiri
+                $insertKhitbahSchedule = KhitbahSchedule::create([
+                    'khitbah_id' => auth('api')->khitbahSubmission()->id,
+                    // 'khitbah_id' => auth('api')->user()->id,
+                    'guardian_name' => $request->guardian_name,
+                    'guardian_phone' => $request->guardian_phone,
+                    'notes' => $request->notes,
+                ]);
+                return ApiFormatter::createApi(200, "Success", $insertKhitbahSchedule);
+            } else { //aplikasi
+                $insertKhitbahSchedule = KhitbahSchedule::create([
+                    'khitbah_id' => auth('api')->khitbahSubmission()->id,
+                    // 'khitbah_id' => auth('api')->user()->id,
+                    'ustadz_id' => $request->ustadz_id,
+                    'notes' => $request->notes,
+                ]);
+                return ApiFormatter::createApi(200, "Success", $insertKhitbahSchedule);
+            }
+        } else {
+            $update = Khitbah::where('id', auth('api')->user()->id)->update($request->all());
+            $update = KhitbahSchedule::where('id', auth('api')->user()->id)->update($request->all());
+            return ApiFormatter::createApi(200, "Success", $request->all());
+        }
+    }
+
+
+    public function userFavorite(Request $request, User $user)
+    {
+        $dataFavorite = Favorite::where('from', auth('api')->user()->id)->first();
+        if ($dataFavorite == 0) {
+            $insertFavorite = Favorite::create([
+                'from' => auth('api')->user()->id,
+                'to' => $user,
+            ]);
+            return ApiFormatter::createApi(200, "Success", $insertFavorite);
+        } 
+    }
+    public function userUnFavorite(Request $request, User $user)
+    {
+        $dataFavorite = Favorite::where('from', auth('api')->user()->id)->first();
+        if ($dataFavorite == 0) {
+            $deleteFavorite = Favorite::delete([
+                'from' => auth('api')->user()->id,
+                'to' => $user,
+            ]);
+            return ApiFormatter::createApi(200, "Success", $deleteFavorite);
+        }
+    }
 }
