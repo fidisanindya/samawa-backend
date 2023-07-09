@@ -84,7 +84,7 @@ class UserController extends Controller
             return ApiFormatter::createApi(200, "Success", $request->all());
         }
     }
-    public function getDetailUser(Request $request)
+    public function getDetailUser()
     {
         $detailUser = User::where('id', auth('api')->user()->id)->first();
         if ($detailUser) {
