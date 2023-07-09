@@ -226,7 +226,11 @@ class UserController extends Controller
             ]);
             return ApiFormatter::createApi(200, "Success", $getsubmission);
         }else{
-            
+            $getsubmission = Khitbah::create([
+                // 'id' => auth('api')->khitbah()->id,
+                'from' => $user,
+            ]);
+            return ApiFormatter::createApi(200, "Success", $getsubmission);
         }
     }
 
