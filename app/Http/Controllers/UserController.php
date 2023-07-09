@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ApiFormatter;
 use App\Models\CurriculumVitae;
+use App\Models\Khitbah;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -158,7 +159,6 @@ class UserController extends Controller
     {
         $dataFromSubmission = Khitbah::where('from', auth('api')->user()->id)->first();
         $dataKhitbahSchedules = KhitbahSchedule::where('khitbah_id', auth('api')->khitbahSubmission()->id)->get()->count();
-        // $dataKhitbahSchedules = KhitbahSchedule::where('khitbah_id', auth('api')->user()->id)->get()->count();
 
         if ($dataFromSubmission == 0 && $dataKhitbahSchedules == 0) {
             $insertKhitbah = Khitbah::create([
@@ -169,7 +169,6 @@ class UserController extends Controller
             if ($pendamping == 0) { //mandiri
                 $insertKhitbahSchedule = KhitbahSchedule::create([
                     'khitbah_id' => auth('api')->khitbahSubmission()->id,
-                    // 'khitbah_id' => auth('api')->user()->id,
                     'guardian_name' => $request->guardian_name,
                     'guardian_phone' => $request->guardian_phone,
                     'notes' => $request->notes,
@@ -206,12 +205,55 @@ class UserController extends Controller
     public function userUnFavorite(Request $request, User $user)
     {
         $dataFavorite = Favorite::where('from', auth('api')->user()->id)->first();
-        if ($dataFavorite == 0) {
+        if ($dataFavorite != 0) {
             $deleteFavorite = Favorite::delete([
                 'from' => auth('api')->user()->id,
                 'to' => $user,
             ]);
             return ApiFormatter::createApi(200, "Success", $deleteFavorite);
+        }
+    }
+
+    public function getKhitbahSubmission(Request $request)
+    {
+        $gender = User::where('id', auth('api')->user()->id)->first();
+        $submission = Khitbah::where('from', auth('api')->user()->id)->first();
+        if($gender->gender == 'Laki-laki'){
+            $getsubmission = Khitbah::create([
+                // 'id' => auth('api')->khitbah()->id,
+                'to' => $user,
+                'status_khitbah' => $status_khitbah,
+            ]);
+            return ApiFormatter::createApi(200, "Success", $getsubmission);
+        }else{
+            
+        }
+    }
+
+    public function getSettings(Request $request)
+    {
+        $settings = User::where('id', auth('api')->user()->id)->first();
+        if ($settings) {
+            $getsetting = User::create([
+                'user_id' => auth('api')->user()->id,
+                'email' => $request->email,
+                'password' => $request->password,
+                'phone' => $request->bornplace,
+            ]);
+            return ApiFormatter::createApi(200, "Success", $getsetting);
+        } else {
+            $update = User::where('user_id', auth('api')->user()->id)->update($request->all());
+            return ApiFormatter::createApi(200, "Success", $request->all());
+        }
+    }
+
+    public function deleteAccount(Request $request){
+        $account = User::where('id', auth('api')->user()->id)->first();
+        if($account){
+            $deleteAccount = User::delete([
+                'id' => auth('api')->user()->id,
+            ]);
+            return ApiFormatter::createApi(200, "Success", $deleteAccount);
         }
     }
 }
