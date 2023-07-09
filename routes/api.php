@@ -29,6 +29,7 @@ Route::post('biodata', [UserController::class, 'biodata'])->middleware('api');
 Route::get('get-user', [UserController::class, 'getUserByGender'])->middleware('api');
 Route::get('newest-user', [UserController::class, 'getNewUser'])->middleware('api');
 Route::get('get-detail-user', [UserController::class, 'getDetailUser'])->middleware('api');
+Route::get('detail-user', [UserController::class, 'getDetailUser'])->middleware('api');
 Route::post('user-verification', [UserController::class, 'userVerification'])->middleware('api');
 Route::post('update-profile', [UserController::class, 'updateProfile'])->middleware('api');
 Route::post('khitbah-submission', [UserController::class, 'khitbahSubmission'])->middleware('api');
