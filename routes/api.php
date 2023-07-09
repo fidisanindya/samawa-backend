@@ -30,7 +30,7 @@ Route::get('get-user', [UserController::class, 'getUserByGender'])->middleware('
 Route::get('newest-user', [UserController::class, 'getNewUser'])->middleware('api');
 Route::get('get-detail-user', [UserController::class, 'getDetailUser'])->middleware('api');
 Route::get('user-verification', [UserController::class, 'userVerification'])->middleware('api');
-Route::get('update-profile', [UserController::class, 'updateProfile'])->middleware('api');
+Route::post('update-profile', [UserController::class, 'updateProfile'])->middleware('api');
 Route::get('khitbah-submission', [UserController::class, 'khitbahSubmission'])->middleware('api');
 Route::get('favorite', [UserController::class, 'userFavorite'])->middleware('api');
 Route::get('unfavorite', [UserController::class, 'userUnFavorite'])->middleware('api');
