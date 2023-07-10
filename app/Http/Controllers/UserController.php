@@ -51,18 +51,22 @@ class UserController extends Controller
 
     public function getNewUser()
     {
-        $gender = User::where('id', auth('api')->user()->id)->first();
-        if($gender->gender == 'Laki-laki'){
-            $dataUser = User::where('gender', 'Perempuan')->orderBy('id', 'desc')->get();
-        }else{
-            $dataUser = User::where('gender', 'Laki-laki')->orderBy('id', 'desc')->get();
-        }
+        // $gender = User::where('id', auth('api')->user()->id)->first();
+        // if($gender->gender == 'Laki-laki'){
+        //     $dataUser = User::where('gender', 'Perempuan')->orderBy('id', 'desc')->get();
+        // }else{
+        //     $dataUser = User::where('gender', 'Laki-laki')->orderBy('id', 'desc')->get();
+        // }
 
-        if($dataUser){
-            return ApiFormatter::createApi(200, "Success", $dataUser);
-        }else{
-            return ApiFormatter::createApi(400, "Failed");
-        }
+        // if($dataUser){
+        //     return ApiFormatter::createApi(200, "Success", $dataUser);
+        // }else{
+        //     return ApiFormatter::createApi(400, "Failed");
+        // }
+
+        $data = User::all();
+        $title = 'user';
+        return view('user.user', compact('data', 'title'));
     }
 
     public function biodata(Request $request)
@@ -82,5 +86,26 @@ class UserController extends Controller
             $update = CurriculumVitae::where('id', auth('api')->user()->id)->update($request->all());
             return ApiFormatter::createApi(200, "Success", $request->all());
         }
+    }
+
+    public function edit($id)
+    {
+        $data = User::find($id);
+        $title = 'edit-user';
+        return view('user.edit', compact('data', 'title'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = User::find($id);
+        $data->update($request->all());
+        return redirect('/user');
+    }
+
+    public function delete($id)
+    {
+        $data = User::find($id);
+        $data->delete();
+        return redirect('/user');
     }
 }
