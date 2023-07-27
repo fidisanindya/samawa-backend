@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('guardian_name');
             $table->string('guardian_phone');
             $table->string('notes');
+            $table->date('date');
+            $table->time('time');
             $table->timestamps();
         });
     }
