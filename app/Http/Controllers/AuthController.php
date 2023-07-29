@@ -37,7 +37,7 @@ class AuthController extends Controller
             'phone' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            'image' => 'required',
+            // 'image' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -93,6 +93,11 @@ class AuthController extends Controller
         }
 
         return $this->respondWithToken($token);
+    }
+
+    public function login_page()
+    {
+        return view('login');
     }
 
     /**

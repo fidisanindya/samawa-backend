@@ -28,3 +28,13 @@ Route::post('curriculum-vitae', [UserController::class, 'curriculumVitae'])->mid
 Route::post('biodata', [UserController::class, 'biodata'])->middleware('api');
 Route::get('get-user', [UserController::class, 'getUserByGender'])->middleware('api');
 Route::get('newest-user', [UserController::class, 'getNewUser'])->middleware('api');
+Route::get('detail-user', [UserController::class, 'getDetailUser'])->middleware('api');
+Route::post('user-verification', [UserController::class, 'userVerification'])->middleware('api');
+Route::post('update-profile', [UserController::class, 'updateProfile'])->middleware('api');
+Route::post('khitbah-submission', [UserController::class, 'khitbahSubmission'])->middleware('api');
+Route::post('favorite', [UserController::class, 'userFavorite'])->middleware('api');
+Route::get('unfavorite', [UserController::class, 'userUnFavorite'])->middleware('api');
+Route::get('get-submission', [UserController::class, 'getSubmission'])->middleware('api');
+Route::get('get-settings', [UserController::class, 'getSettings'])->middleware('api');
+Route::post('delete-account', [UserController::class, 'deleteAccount'])->middleware('api');
+

@@ -1,22 +1,13 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CVController;
 use App\Http\Controllers\KhitbahController;
 use App\Http\Controllers\KhitbahScheduleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UstadzController;
+use App\Http\Controllers\VarificationController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 $controller_path = 'App\Http\Controllers';
 
@@ -25,6 +16,8 @@ Route::get('/', function () {
         'title' => 'home'
     ]);
 });
+
+Route::get('/login-page', [AuthController::class,'login_page']);
 
 Route::get('/user', [UserController::class,'getNewUser']);
 Route::get('/user/edit/{id}', [UserController::class,'edit']); // menampilkan form
@@ -45,3 +38,7 @@ Route::get('/khitbah/create', [KhitbahScheduleController::class,'create']);
 
 Route::get('/cv', [CVController::class,'index']);
 Route::get('/cv/detail/{id}', [CVController::class,'detail']); // menampilkan detail
+
+Route::get('/varification', [VarificationController::class,'index']);
+Route::get('/varification/detail/{id}', [VarificationController::class,'detail']); // menampilkan detail
+Route::post('/varification/update/{id}', [VarificationController::class,'update']); 

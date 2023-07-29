@@ -29,6 +29,13 @@
           </a>
         </li>
 
+        <li class="sidebar-item {{ ($title === 'varification' || $title === 'edit-varification' ? 'active' : '') }} ">
+          <a href="/varification" class='sidebar-link'>
+              <i class="fa-solid fa-user-check" style="color: #ff9100;"></i>
+              <span>Verifikasi User</span>
+          </a>
+        </li>
+
         <li class="sidebar-item {{ ($title === 'cv' || $title === 'view-cv' ? 'active' : '') }} ">
           <a href="/cv" class='sidebar-link'>
               <i class="fa-solid fa-file" style="color: #ff9100;"></i>

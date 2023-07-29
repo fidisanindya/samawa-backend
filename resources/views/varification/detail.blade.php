@@ -5,14 +5,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Detail CV</h3>
-                    <p class="text-subtitle text-muted">Detail CV</p>
+                    <h3>Detail User</h3>
+                    <p class="text-subtitle text-muted">Detail User</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Detail CV</li>
+                            <li class="breadcrumb-item active" aria-current="page">Detail User</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,44 +29,29 @@
                             <table class="table" id="table1">
                                 <img class="card-img-top img-fluid" src="{{asset('assets/images/users/ali-assegaf.jpg')}}" alt="Card image cap" style="width: 200px; height: 237px; object-fit: cover;" />
                                 <tr>
-                                    <th>Nama</th>
+                                    <th>ID User</th>
                                     <th>:</th>
-                                    <td>{{ $data->user->name }}</td>
+                                    <td>{{ $data->user_id }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Deskripsi</th>
+                                    <th>KTP</th>
                                     <th>:</th>
-                                    <td>{{ $data->description }}</td>
+                                    <td>{{ $data->ktp }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Esai</th>
+                                    <th>Tempat Lahir</th>
                                     <th>:</th>
-                                    <td>{{ $data->essay }}</td>
+                                    <td>{{ $data->bornplace }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Pendidikan Terakhir</th>
+                                    <th>Tanggal Lahir</th>
                                     <th>:</th>
-                                    <td>{{ $data->education }}</td>
+                                    <td>{{ $data->bornday }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Perkerjaan</th>
+                                    <th>Jenis Kelamin</th>
                                     <th>:</th>
-                                    <td>{{ $data->career }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Hobi</th>
-                                    <th>:</th>
-                                    <td>{{ $data->hobby }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Visi</th>
-                                    <th>:</th>
-                                    <td>{{ $data->vission }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Misi</th>
-                                    <th>:</th>
-                                    <td>{{ $data->mission }}</td>
+                                    <td>{{ $data->gender }}</td>
                                 </tr>
                                 <tr>
                                     <th>Status Perkawinan</th>
@@ -74,32 +59,47 @@
                                     <td>{{ $data->marital_status }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Kesiapan Menikah</th>
+                                    <th>Alamat</th>
                                     <th>:</th>
-                                    <td>{{ $data->marriage_prep }}</td>
+                                    <td>{{ $data->address }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Target Menikah</th>
+                                    <th>RT</th>
                                     <th>:</th>
-                                    <td>{{ $data->marriage_target }}</td>
+                                    <td>{{ $data->rt }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Info Keluarga</th>
+                                    <th>RW</th>
                                     <th>:</th>
-                                    <td>{{ $data->family_info }}</td>
+                                    <td>{{ $data->rw }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Status Keagamaan</th>
+                                    <th>Provinsi</th>
                                     <th>:</th>
-                                    <td>{{ $data->religion_status }}</td>
+                                    <td>{{ $data->province }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Mahdzab</th>
+                                    <th>Kota</th>
                                     <th>:</th>
-                                    <td>{{ $data->mahdzab }}</td>
+                                    <td>{{ $data->city }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Kecamatan</th>
+                                    <th>:</th>
+                                    <td>{{ $data->subdistrict }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Kelurahan</th>
+                                    <th>:</th>
+                                    <td>{{ $data->urban_village }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Kode Pos</th>
+                                    <th>:</th>
+                                    <td>{{ $data->postal_code }}</td>
                                 </tr>
                             </table>
-                            <button onclick="location.href='{{ url('/cv') }}'" class="btn btn-primary" type="button">Kembali</button>
+                            <button onclick="location.href='{{ url('/varification') }}'" class="btn btn-primary" type="button">Kembali</button>
                         </div>
                     </div>
                 </div>
