@@ -68,7 +68,7 @@ class AuthController extends Controller
             }
         }
 
-        if ($user && $photo) {
+        if ($user) {
             return response()->json(['message' => 'Successfully registered']);
         } else {
             return response()->json(['message' => 'Register Failed']);
