@@ -12,4 +12,11 @@ class KhitbahController extends Controller
         $title = 'khitbah';
         return view('khitbah.khitbah', compact('data', 'title'));
     }
+
+    public function detail($id)
+    {
+        $data = Khitbah::find($id);
+        $title = 'detail-khitbah';
+        return view('khitbah.detail', compact('data', 'title'));
+    }
 }

@@ -11,7 +11,7 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Detail User</li>
                         </ol>
                     </nav>
@@ -28,6 +28,7 @@
                         <div class="card-body">
                             <table class="table" id="table1">
                                 <img class="card-img-top img-fluid" src="{{asset('assets/images/users/ali-assegaf.jpg')}}" alt="Card image cap" style="width: 200px; height: 237px; object-fit: cover;" />
+                                {{-- <img class="card-img-top img-fluid" src="{{$data->face_with_ktp}}" alt="Card image cap" style="width: 200px; height: 237px; object-fit: cover;" /> --}}
                                 <tr>
                                     <th>ID User</th>
                                     <th>:</th>
@@ -99,7 +100,15 @@
                                     <td>{{ $data->postal_code }}</td>
                                 </tr>
                             </table>
-                            <button onclick="location.href='{{ url('/varification') }}'" class="btn btn-primary" type="button">Kembali</button>
+                            <div class="d-flex justify-content-end gap-2">
+                                {{-- <button onclick="location.href='{{ url('/varification/{user}') }}'" class="btn btn-success" type="button">Verifikasi</button> --}}
+                                <form action="{{ route('varificate', $data) }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-success" type="submit">Verifikasi</button>
+                                </form>
+                                {{-- <button onclick="location.href='{{ url('/varification') }}'" class="btn btn-danger" type="button">Tolak</button> --}}
+                                <button onclick="location.href='{{ url('/varification') }}'" class="btn btn-primary" type="button">Kembali</button>
+                            </div>
                         </div>
                     </div>
                 </div>

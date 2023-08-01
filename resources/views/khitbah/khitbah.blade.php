@@ -17,7 +17,7 @@
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Khitbah</li>
                             </ol>
                         </nav>
@@ -43,19 +43,15 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @php
-                                $no = 1;
-                            @endphp
+                        <tbody style="font-size: 12px">
                             @foreach ($data as $item)
                                 <tr>
-                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->from }}</td>
                                     <td>{{ $item->to }}</td>
                                     <td>{{ $item->status }}</td>
-                                    <td>
-                                        <a href="/ustadz/edit/{{ $item->id }}" class="fa-solid fa-pen p-2"></a>
-                                        <a href="/ustadz/delete/{{ $item->id }}" class="fa-solid fa-trash p-2"></a>
+                                    <td class="d-flex">
+                                        <a href="/khitbah/detail/{{ $item->id }}" class="fa-solid fa-eye p-2"></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -65,17 +61,5 @@
             </div>
             </section>
         </div>
-
-        <footer>
-            <div class="footer clearfix mb-0 text-muted">
-                <div class="float-start">
-                    <p>2023 &copy; Samawa</p>
-                </div>
-                <div class="float-end">
-                    <p>Created with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                            href="https://saugi.me">Samawa</a></p>
-                </div>
-            </div>
-        </footer>
     </div>
 @endsection

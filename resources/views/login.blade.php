@@ -12,43 +12,38 @@
 </head>
 
 <body>
-    <div id="auth">
-        
-<div class="row">
-    <div class="col-lg-5 col-12">
-        <div id="auth-left">
-            <div class="auth-logo">
-                <a href="index.html"><img src="assets/images/logo/logo.svg" alt="Logo"></a>
+    <div id="auth"> 
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="container col-4">
+                <div class="card">
+                    <div class="auth-logo text-center mb-5">
+                        <img src="{{asset('assets/images/logo/logo.png')}}" style="width: 50%" alt="Logo">
+                    </div>
+                    <h1 class="auth-title text-center">Login</h1>
+                    <p class="auth-subtitle mb-5 text-center">Login dengan Email dan Password yang Anda Miliki</p>
+            
+                    <form action="{{ route('authenticate') }}" method="POST">
+                        @csrf
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" class="form-control form-control-xl" placeholder="Email" name="email">
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="password" class="form-control form-control-xl" placeholder="Password" name="password">
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-lg mt-5">Login</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <h1 class="auth-title">Log in.</h1>
-            <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
-
-            <form action="">
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="text" class="form-control form-control-xl" placeholder="Username">
-                    <div class="form-control-icon">
-                        <i class="bi bi-person"></i>
-                    </div>
-                </div>
-                <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="password" class="form-control form-control-xl" placeholder="Password">
-                    <div class="form-control-icon">
-                        <i class="bi bi-shield-lock"></i>
-                    </div>
-                </div>
-                <div class="form-check form-check-lg d-flex align-items-end">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label text-gray-600" for="flexCheckDefault">
-                        Keep me logged in
-                    </label>
-                </div>
-            </form>
-    
-            <button class="btn btn-primary btn-lg shadow-lg mt-5">Interpreter</button>
         </div>
     </div>
-</div>
-
 </body>
 
 </html>

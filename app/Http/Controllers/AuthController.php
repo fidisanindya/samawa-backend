@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Photo;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,10 +16,10 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    // }
 
     /**
      * Get a JWT via given credentials.
@@ -26,6 +27,40 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
+    public function authenticate(Request $request) // login admin di web
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect('/home')
+                ->withSuccess('You have successfully logged in!');
+        }
+
+        return back()->withErrors([
+            'email' => 'Your provided credentials do not match in our records.',
+        ])->onlyInput('email');
+    }
+
+    public function dashboard()
+    {
+        if (Auth::check()) {
+            return view('welcome');
+        }
+
+        return redirect('/login');
+    }
+    
+    public function logout_page()
+    {
+        Auth::logout();
+
+        return redirect()->route('login');
+    }
+    
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [

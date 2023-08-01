@@ -17,7 +17,7 @@
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Verifikasi User</li>
                             </ol>
                         </nav>
@@ -48,7 +48,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="font-size: 12px">
                             @php
                                 $no = 1;
                             @endphp
@@ -74,17 +74,5 @@
             </div>
             </section>
         </div>
-
-        <footer>
-            <div class="footer clearfix mb-0 text-muted">
-                <div class="float-start">
-                    <p>2023 &copy; Samawa</p>
-                </div>
-                <div class="float-end">
-                    <p>Created with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                            href="#">Samawa</a></p>
-                </div>
-            </div>
-        </footer>
     </div>
 @endsection

@@ -17,7 +17,7 @@
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Jadwal Khitbah</li>
                             </ol>
                         </nav>
@@ -42,10 +42,12 @@
                                 <th>Nama Pendamping</th>
                                 <th>Nomor Telepon Pendamping</th>
                                 <th>Catatan</th>
+                                <th>Tanggal</th>
+                                <th>Waktu</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="font-size: 12px">
                             @php
                                 $no = 1;
                             @endphp
@@ -57,9 +59,10 @@
                                     <td>{{ $item->guardian_name }}</td>
                                     <td>{{ $item->guardian_phone }}</td>
                                     <td>{{ $item->notes }}</td>
-                                    <td>
-                                        <a href="/ustadz/edit/{{ $item->id }}" class="fa-solid fa-pen p-2"></a>
-                                        <a href="/ustadz/delete/{{ $item->id }}" class="fa-solid fa-trash p-2"></a>
+                                    <td>{{ $item->date }}</td>
+                                    <td>{{ $item->time }}</td>
+                                    <td class="d-flex">
+                                        <a href="/khitbah-schedule/detail/{{ $item->id }}" class="fa-solid fa-eye p-2"></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -69,17 +72,5 @@
             </div>
             </section>
         </div>
-
-        <footer>
-            <div class="footer clearfix mb-0 text-muted">
-                <div class="float-start">
-                    <p>2023 &copy; Samawa</p>
-                </div>
-                <div class="float-end">
-                    <p>Created with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                            href="https://saugi.me">Samawa</a></p>
-                </div>
-            </div>
-        </footer>
     </div>
 @endsection

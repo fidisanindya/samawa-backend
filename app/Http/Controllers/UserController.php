@@ -10,6 +10,7 @@ use App\Models\Varification;
 use App\Models\Favorite;
 use App\Models\User;
 use App\Models\Photo;
+use App\Models\Ustadz;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,15 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+
+    public function index()
+    {
+        $total_user = User::all()->count();
+        $total_ustadz = Ustadz::all()->count();
+        $total_khitbah = Khitbah::all()->count();
+        $title = 'home';
+        return view('home', compact('title','total_user', 'total_ustadz', 'total_khitbah'));
+    }
 
     public function curriculumVitae(Request $request)
     {
@@ -95,26 +105,27 @@ class UserController extends Controller
         }
     }
 
-//     public function edit($id)
-//     {
-//         $data = User::find($id);
-//         $title = 'edit-user';
-//         return view('user.edit', compact('data', 'title'));
-//     }
+    public function edit($id)
+    {
+        $data = User::find($id);
+        $title = 'edit-user';
+        return view('user.edit', compact('data', 'title'));
+    }
 
-//     public function update(Request $request, $id)
-//     {
-//         $data = User::find($id);
-//         $data->update($request->all());
-//         return redirect('/user');
-//     }
+    public function update(Request $request, $id)
+    {
+        $data = User::find($id);
+        $data->update($request->all());
+        return redirect('/user');
+    }
 
-//     public function delete($id)
-//     {
-//         $data = User::find($id);
-//         $data->delete();
-//         return redirect('/user');
-// =======
+    public function delete($id)
+    {
+        $data = User::find($id);
+        $data->delete();
+        return redirect('/user');
+    }
+
     public function getDetailUser()
     {
         $detailUser = User::where('id', auth('api')->user()->id)->first();
